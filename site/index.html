@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Who's hiring on Hacker News? Job-market trends since 2011</title>
+  <meta name="description" content="Every 'Ask HN: Who is hiring?' thread since 2011, parsed into trends: job volume, remote work, salaries, and technologies. Updated daily.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='3' fill='%23ff6600'/><path d='M4 4l4 5 4-5M8 9v4' stroke='white' stroke-width='1.8' fill='none'/></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="wrap">
+    <p class="eyebrow">Hacker News job-market tracker</p>
+    <h1>Who's hiring on Hacker News?</h1>
+    <p class="lede">Every monthly <em>“Ask HN: Who is hiring?”</em> thread since 2011, parsed into trends you can compare: hiring volume, remote work, pay transparency, and the technologies companies ask for.</p>
+    <p class="meta" id="meta">Loading…</p>
+  </header>
+
+  <main class="wrap">
+    <h2 class="kpi-month" id="kpi-month"></h2>
+    <section class="kpis" id="kpis" aria-label="Latest month at a glance"></section>
+
+    <div class="range" role="group" aria-label="Time range">
+      <span>Range</span>
+      <button data-range="all" class="on">All time</button>
+      <button data-range="2020">Since 2020</button>
+      <button data-range="24">Last 24 months</button>
+    </div>
+
+    <section class="card wide">
+      <h2>Job posts per month</h2>
+      <p class="sub">Top-level posts in each thread. The line is the 12-month average.</p>
+      <div class="chart"><canvas id="posts"></canvas></div>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Where the work happens</h2>
+        <p class="sub">Share of posts by stated work arrangement (3-month average).</p>
+        <div class="chart"><canvas id="arrangement"></canvas></div>
+      </section>
+      <section class="card">
+        <h2>Pay transparency</h2>
+        <p class="sub">Share of posts listing a USD salary, and the median listed salary (range midpoint).</p>
+        <div class="chart"><canvas id="salary"></canvas></div>
+      </section>
+    </div>
+
+    <section class="card wide">
+      <h2>Technology mentions</h2>
+      <p class="sub">Share of posts mentioning each technology (3-month average). Click to compare.</p>
+      <div class="chips" id="chips"></div>
+      <div class="chart tall"><canvas id="tech"></canvas></div>
+    </section>
+
+    <section class="card wide">
+      <h2>Rising and falling</h2>
+      <p class="sub" id="movers-sub">Share of posts, last 12 months vs. the 12 months before.</p>
+      <table class="movers" id="movers">
+        <thead><tr><th>Technology</th><th class="num">Before</th><th class="num">Now</th><th>Change</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section class="card wide method" id="method">
+      <h2>Method</h2>
+      <ul>
+        <li><strong>Source.</strong> Threads posted by the <code>whoishiring</code> account, fetched from the public Algolia Hacker News API. Each top-level comment counts as one job post.</li>
+        <li><strong>Classification.</strong> A tested pattern library tags each post with technologies, work arrangement, salary ranges, and visa sponsorship. Ambiguous words such as “Go”, “React” and “Node” are matched case-sensitively and with exclusions (“go-to”, “react to”).</li>
+        <li><strong>Salaries.</strong> USD annual figures only (“$140k–$180k”, “$165,000”). Hourly, monthly, funding and bonus amounts are excluded. Months with fewer than 15 salaried posts are left out of the median.</li>
+        <li><strong>Work arrangement.</strong> Posts mentioning remote and on-site, or hybrid, count as hybrid. Before mid-2015 the thread format did not ask for location, so many early posts are “unspecified”.</li>
+        <li><strong>Updates.</strong> A scheduled GitHub Actions job refreshes the latest threads daily and redeploys this page. The current month appears once its thread closes.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>Built by Zaid A. · <a href="https://github.com/ZA1815/hn-hiring-trends">Source on GitHub</a> · Data: <a href="https://hn.algolia.com/api">HN Algolia API</a></p>
+  </footer>
+
+  <script src="vendor/chart.umd.min.js"></script>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
