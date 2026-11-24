@@ -5,7 +5,8 @@
   --muted: #5d6572;
   --line: #e4e7ec;
   --accent: #ff6600;
-  --up: #0f8a4a;
+  --accent-text: #b84a00;
+  --up: #0d7f44;
   --down: #c2362b;
   --radius: 14px;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -18,7 +19,7 @@ body { margin: 0; line-height: 1.5; }
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
 header { padding: 48px 24px 20px; }
-.eyebrow { margin: 0 0 6px; color: var(--accent); font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+.eyebrow { margin: 0 0 6px; color: var(--accent-text); font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
 h1 { margin: 0; font-size: clamp(28px, 4vw, 42px); letter-spacing: -.02em; line-height: 1.15; }
 .lede { max-width: 760px; color: var(--muted); font-size: 17px; margin: 12px 0 8px; }
 .meta { color: var(--muted); font-size: 13px; margin: 0; }

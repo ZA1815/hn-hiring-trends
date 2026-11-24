@@ -180,7 +180,7 @@ function renderChips() {
   el.innerHTML = data.techs
     .map((t) => {
       const on = selected.has(t);
-      return `<button class="chip${on ? " on" : ""}" data-tech="${t}" style="${on ? `color:${colorOf(t)}` : ""}"><i style="${on ? `background:${colorOf(t)}` : ""}"></i>${t}</button>`;
+      return `<button class="chip${on ? " on" : ""}" data-tech="${t}" style="${on ? `border-color:${colorOf(t)}` : ""}"><i style="${on ? `background:${colorOf(t)}` : ""}"></i>${t}</button>`;
     })
     .join("");
 }
